@@ -25,7 +25,7 @@ public class UserServiceImplementation implements UserService {
 //    }
 
     @Override
-    public User registration(RegistrationRequest registrationRequest) {
+    public User registerUser(RegistrationRequest registrationRequest) {
         if(userRepository.findByEmail(registrationRequest.getEmail()).isPresent()) {
             throw new ResponseStatusException(HttpStatus.CONFLICT, "User with email already exists");
         }

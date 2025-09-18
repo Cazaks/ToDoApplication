@@ -1,6 +1,7 @@
 package com.todoApplication.controllers;
 
 import com.todoApplication.datas.models.User;
+import com.todoApplication.dtos.requests.RegistrationRequest;
 import com.todoApplication.dtos.requests.TaskRequestDTO;
 import com.todoApplication.dtos.responses.TaskResponseDTO;
 import com.todoApplication.dtos.responses.UserResponseDTO;
@@ -24,7 +25,12 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<User> register(UserResponseDTO userResponseDTO) {
+    public ResponseEntity<User> register(@RequestBody RegistrationRequest registrationRequest) {
+        if(registrationRequest.getEmail() == null || registrationRequest.getEmail().isEmpty() || registrationRequest.getPassword() == null || registrationRequest.getPassword().isEmpty()) {
+            throw new IllegalArgumentException("Invalid email or password");
+        }
+        User registeredUser = userService.registerUser(registrationRequest);
+        return ResponseEntity.ok(registeredUser);
 
     }
 }

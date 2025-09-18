@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public interface UserService {
 
-    User registration(RegistrationRequest registrationRequest);
+    User registerUser(RegistrationRequest registrationRequest);
 
     User login(LoginRequest loginRequest);
 
