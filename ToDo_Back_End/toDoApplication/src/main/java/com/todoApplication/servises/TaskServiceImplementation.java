@@ -2,6 +2,7 @@ package com.todoApplication.servises;
 
 import com.todoApplication.datas.models.Task;
 import com.todoApplication.datas.repositories.TaskRepository;
+import com.todoApplication.datas.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -11,11 +12,13 @@ import java.util.List;
 @RequiredArgsConstructor
 public class TaskServiceImplementation implements TaskService {
 
-    private TaskRepository taskRepository;
+//    private TaskRepository taskRepository;
 
-    public TaskServiceImplementation(TaskRepository taskRepository) {
-        this.taskRepository = taskRepository;
-    }
+    private final TaskRepository taskRepository;
+//
+//    public TaskServiceImplementation(TaskRepository taskRepository) {
+//        this.taskRepository = taskRepository;
+//    }
 
     public List<Task> findAll() {
         return taskRepository.findAll();

@@ -4,14 +4,13 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class TaskResponseDTO {
-    private String id;
-    private String title;
-    private String description;
-    private LocalDateTime dueDate;
+public class UserResponseDTO {
+
+    private String userId;
+    private String firstName;
+    private String lastName;
+    private String email;
 }

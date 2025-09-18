@@ -4,6 +4,7 @@ import com.todoApplication.datas.models.User;
 import com.todoApplication.datas.repositories.UserRepository;
 import com.todoApplication.dtos.requests.LoginRequest;
 import com.todoApplication.dtos.requests.RegistrationRequest;
+import lombok.RequiredArgsConstructor;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,13 +14,15 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class UserServiceImplementation implements UserService {
 
+//    private UserRepository userRepository;
     private final UserRepository userRepository;
-    @Autowired
-    public UserServiceImplementation(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
+//    @Autowired
+//    public UserServiceImplementation(UserRepository userRepository) {
+//        this.userRepository = userRepository;
+//    }
 
     @Override
     public User registration(RegistrationRequest registrationRequest) {
