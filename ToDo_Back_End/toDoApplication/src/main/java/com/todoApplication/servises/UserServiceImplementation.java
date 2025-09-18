@@ -44,15 +44,24 @@ public class UserServiceImplementation implements UserService {
 
     @Override
     public User login(LoginRequest loginRequest) {
-        return null;
+        Optional<User> optionalUser = userRepository.findByEmail(loginRequest.getEmail());
+
+        if(optionalUser.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Guy, you no dey, why you de stress person?");
+        }
+
+        User user = optionalUser.get();
+
+        if(!BCrypt.checkpw(loginRequest.getPassword(), user.getPassword())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Try de get sense, this password no correct");
+        }
+
+        return user;
     }
 
-    @Override
-    public Optional<User> findByEmail(String email) {
+        @Override
+        public Optional<User> findByEmail(String email){
         return userRepository.findByEmail(email);
-    }
+        }
 
-//    public User login(String email, String password) {
-//
-//   }
 }

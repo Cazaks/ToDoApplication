@@ -13,4 +13,5 @@ public interface UserService {
     User login(LoginRequest loginRequest);
 
     Optional<User> findByEmail(String email);
+
 }
