@@ -14,4 +14,5 @@ public class TaskRequestDTO {
     private String title;
     private String description;
     private LocalDate dueDate;
+    private String email;
 }
