@@ -57,20 +57,6 @@ class UserServiceImplementationTest {
     }
 
     @Test
-    void TestThatFirstAndLastNameThrowExceptionErrorIfEmpty(){
-        registrationRequest.setEmail("");
-        registrationRequest.setLastName("");
-
-        try {
-            userService.registerUser(registrationRequest);
-            fail("Registration should fail because first and last name is empty");
-        } catch (ResponseStatusException ex) {
-            assertEquals(HttpStatus.BAD_REQUEST, ex.getStatusCode());
-            assertEquals("Your paper and mama bin no give you name wen dem born you?", ex.getReason());
-        }
-    }
-
-    @Test
     void TestDuplicateEmail_ThrowsEmailAlreadyExistExceptionError() {
         User savedUser = userService.registerUser(registrationRequest);
 
@@ -81,6 +67,42 @@ class UserServiceImplementationTest {
         } catch (ResponseStatusException ex){
            assertEquals(HttpStatus.CONFLICT, ex.getStatusCode());
            assertEquals("Why you wan tiff persons email na?", ex.getReason());
+        }
+    }
+
+    @Test
+    void TestThatRegistrationFails_IfEmailIsEmpty_And_IfEmailIsInvalid() {
+        registrationRequest.setEmail("");
+
+        try {
+            userService.registerUser(registrationRequest);
+            fail("The registration should fail because email is empty");
+        } catch (ResponseStatusException ex) {
+            assertEquals(HttpStatus.BAD_REQUEST, ex.getStatusCode());
+            assertEquals("You no get email?", ex.getReason());
+        }
+
+        registrationRequest.setEmail("invalid-mail");
+        try {
+            userService.registerUser(registrationRequest);
+            fail("The registration should fail because email is invalid");
+        } catch (ResponseStatusException ex) {
+            assertEquals(HttpStatus.BAD_REQUEST, ex.getStatusCode());
+            assertEquals("Na so them de write email for your village?", ex.getReason());
+        }
+    }
+
+    @Test
+    void TestThatFirstAndLastNameThrowExceptionErrorIfEmpty(){
+        registrationRequest.setFirstName("");
+        registrationRequest.setLastName("");
+
+        try {
+            userService.registerUser(registrationRequest);
+            fail("Registration should fail because first and last name is empty");
+        } catch (ResponseStatusException ex) {
+            assertEquals(HttpStatus.BAD_REQUEST, ex.getStatusCode());
+            assertEquals("Your paper and mama bin no give you name wen dem born you?", ex.getReason());
         }
     }
 

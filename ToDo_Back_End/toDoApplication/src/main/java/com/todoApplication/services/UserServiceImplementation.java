@@ -26,6 +26,20 @@ public class UserServiceImplementation implements UserService {
             throw new ResponseStatusException(HttpStatus.CONFLICT, "Why you wan tiff persons email na?");
         }
 
+        if(registrationRequest.getEmail() == null || registrationRequest.getEmail().trim().isBlank()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "You no get email?");
+        }
+
+        if(!registrationRequest.getEmail().matches("^[\\w.-]+@[\\w.-]+\\.[a-zA-Z]{2,}$")){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Na so them de write email for your village?");
+        }
+
+
+        if(registrationRequest.getFirstName() == null || registrationRequest.getFirstName().trim().isBlank()
+        || registrationRequest.getLastName() == null || registrationRequest.getLastName().trim().isBlank()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Your paper and mama bin no give you name wen dem born you?");
+        }
+
         if(registrationRequest.getPassword() == null || registrationRequest.getPassword().isBlank()){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "You no carry key how you want take enter, you be tiff?");
         }
